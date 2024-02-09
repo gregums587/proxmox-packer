@@ -135,6 +135,7 @@ sed -i 's/console=tty0/console=tty0 console=ttyS0,115200n8/' /boot/grub2/grub.cf
 # echo "(Don't worry -- that out-of-space error was expected.)"
 
 yum update -y
+yum install cloud-init
 
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 echo "PermitRootLogin yes" > /etc/ssh/sshd_config.d/allow-root-ssh.conf
