@@ -135,7 +135,9 @@ sed -i 's/console=tty0/console=tty0 console=ttyS0,115200n8/' /boot/grub2/grub.cf
 # echo "(Don't worry -- that out-of-space error was expected.)"
 
 yum update -y
-yum install cloud-init
+adduser super
+ssh-keygen -q -t rsa -N '' -f home/super/.ssh/id_rsa <<<y >/dev/null 2>&1
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDV+ZV9eKAQSkAqbhlIc6zb+MakPLlwpMIrGSeLmLUhqe/hSfsRaGx0RnmddOdxxeW+ScOxt0Q0hLdCfWP+yZ+9qu50TZRSIePrYXsLroN2mT8DvbkYaKwJyA7sGzTIyxrz7CJPzZUCu5RbI49MVT7dC/QP8fCetnZi0dW+mACb5KHamB95bxH1a4WfjdFGRN8jM2JA5aKEP1qJ7FzmxJ4vN1a9k9H9ovfza3fkytDaHjYjKFF3F6u7+aciwAKyIQSSgPySFzxebXRVKbAOYwrJc6vb2KkQWCrgZNo6sHyUuFN36H1vmaQzPdym1az/fdHrDv7f5BS5fIYvnT4AYueiWubNIyszwWmjlxZRoGIJTjSUXZEeHYNzA3vFsPOsBnfJa8TgkFL2TLnxVQUAT2uRLe/Om2qDdFGq1K5zSf+NtYNThnNjt8lbAp6DuUuuXyyinItcxi/o9uSQ5xXqTIKprvqkM1MSr/bxvLCzkOOPfOdC0TK1qxSBDOa59AwTsOs=" >> /home/super/.ssh/authorized_keys
 
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 echo "PermitRootLogin yes" > /etc/ssh/sshd_config.d/allow-root-ssh.conf
